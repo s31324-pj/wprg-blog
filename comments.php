@@ -8,26 +8,41 @@ $comments = $db->query('SELECT c.*, p.title AS post_title, u.username FROM comme
 include 'header.php';
 include 'dashboard_nav.php';
 ?>
-<h2>All Comments</h2>
-<table>
-    <tr>
-        <th>Post</th>
-        <th>Author</th>
-        <th>Content</th>
-        <th>Date</th>
-        <th>Actions</th>
-    </tr>
-    <?php foreach($comments as $c): ?>
-    <tr>
-        <td><?php echo htmlspecialchars($c['post_title']); ?></td>
-        <td><?php echo htmlspecialchars($c['author']); ?></td>
-        <td><?php echo nl2br(htmlspecialchars($c['content'])); ?></td>
-        <td><?php echo $c['created_at']; ?></td>
-        <td>
-            <a href="<?php echo BASE_PATH; ?>delete_comment.php?id=<?php echo $c['id']; ?>" onclick="return confirm('delete?')">Delete</a>
-            | <a href="<?php echo BASE_PATH; ?>edit_comment.php?id=<?php echo $c['id']; ?>">Edit</a>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+
+
+
+
+
+
+<section class="comments-page heading">
+    <div class="content">
+
+        <h2>All Comments</h2>
+        <table>
+            <tr>
+                <th>Post</th>
+                <th>Author</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            <?php foreach($comments as $c): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($c['post_title']); ?></td>
+                <td><?php echo htmlspecialchars($c['author']); ?></td>
+                <td><?php echo nl2br(htmlspecialchars($c['content'])); ?></td>
+                <td><?php echo $c['created_at']; ?></td>
+                <td>
+                    <a href="<?php echo BASE_PATH; ?>delete_comment.php?id=<?php echo $c['id']; ?>" onclick="return confirm('delete?')">Delete</a>
+                    | <a href="<?php echo BASE_PATH; ?>edit_comment.php?id=<?php echo $c['id']; ?>">Edit</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</section>
+
+
+
+
 <?php include 'footer.php'; ?>

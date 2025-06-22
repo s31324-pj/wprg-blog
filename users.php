@@ -116,74 +116,87 @@ $users = $db->query('SELECT id, username, role, profile_picture FROM users ORDER
 include 'header.php';
 include 'dashboard_nav.php';
 ?>
-<h2>Manage Users</h2>
-<?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
-<?php if(isset($message)) echo '<p>'.htmlspecialchars($message).'</p>'; ?>
-<h3>Add User</h3>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <input type="hidden" name="create" value="1">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <select name="role">
-        <option value="user">User</option>
-        <option value="author">Author</option>
-        <option value="admin">Admin</option>
-    </select>
-    <button type="submit">Create</button>
-</form>
-<h3>Existing Users</h3>
-<table>
-    <tr>
-        <th>Username</th>
-        <th>Picture</th>
-        <th>Role</th>
-        <th>New Password</th>
-        <th>Actions</th>
-    </tr>
-    <?php foreach($users as $u): ?>
-    <tr>
-        <td><?php echo htmlspecialchars($u['username']); ?></td>
-        <td>
-            <img src="<?php echo BASE_PATH . (!empty($u['profile_picture']) ? $u['profile_picture'] : 'content/default-pfp.webp'); ?>" class="avatar" alt="Profile">
-            <?php if(!empty($u['profile_picture'])): ?>
-                <form method="post" style="display:inline">
-                    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-                    <input type="hidden" name="remove_picture" value="1">
-                    <input type="hidden" name="id" value="<?php echo $u['id']; ?>">
-                    <button type="submit">Remove picture</button>
-                </form>
-            <?php endif; ?>
-        </td>
-        <td>
-            <form method="post" style="display:inline">
-                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-                <input type="hidden" name="update_role" value="1">
-                <input type="hidden" name="id" value="<?php echo $u['id']; ?>">
-                <select name="role">
-                    <option value="user" <?php if($u['role']==='user') echo 'selected'; ?>>User</option>
-                    <option value="author" <?php if($u['role']==='author') echo 'selected'; ?>>Author</option>
-                    <option value="admin" <?php if($u['role']==='admin') echo 'selected'; ?>>Admin</option>
-                </select>
-                <button type="submit">Change</button>
-            </form>
-        </td>
-        <td>
-            <form method="post" style="display:inline">
-                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-                <input type="hidden" name="update_password" value="1">
-                <input type="hidden" name="id" value="<?php echo $u['id']; ?>">
-                <input type="password" name="password_new" placeholder="New password">
-                <button type="submit">Set</button>
-            </form>
-        </td>
-        <td>
-            <?php if($u['id'] != current_user()['id']): ?>
-                <a href="<?php echo BASE_PATH; ?>users?delete=<?php echo $u['id']; ?>" onclick="return confirm('delete?')">Delete</a>
-            <?php else: ?>-
-            <?php endif; ?>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+
+
+
+
+
+<section class="comments-page">
+    <div class="content">
+        <h2>Manage Users</h2>
+        <?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
+        <?php if(isset($message)) echo '<p>'.htmlspecialchars($message).'</p>'; ?>
+        <h3>Add User</h3>
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+            <input type="hidden" name="create" value="1">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <select name="role">
+                <option value="user">User</option>
+                <option value="author">Author</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Create</button>
+        </form>
+        <h3>Existing Users</h3>
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Picture</th>
+                <th>Role</th>
+                <th>New Password</th>
+                <th>Actions</th>
+            </tr>
+            <?php foreach($users as $u): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($u['username']); ?></td>
+                <td>
+                    <img src="<?php echo BASE_PATH . (!empty($u['profile_picture']) ? $u['profile_picture'] : 'content/default-pfp.webp'); ?>" class="avatar" alt="Profile">
+                    <?php if(!empty($u['profile_picture'])): ?>
+                        <form method="post" style="display:inline">
+                            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+                            <input type="hidden" name="remove_picture" value="1">
+                            <input type="hidden" name="id" value="<?php echo $u['id']; ?>">
+                            <button type="submit">Remove picture</button>
+                        </form>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <form method="post" style="display:inline">
+                        <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+                        <input type="hidden" name="update_role" value="1">
+                        <input type="hidden" name="id" value="<?php echo $u['id']; ?>">
+                        <select name="role">
+                            <option value="user" <?php if($u['role']==='user') echo 'selected'; ?>>User</option>
+                            <option value="author" <?php if($u['role']==='author') echo 'selected'; ?>>Author</option>
+                            <option value="admin" <?php if($u['role']==='admin') echo 'selected'; ?>>Admin</option>
+                        </select>
+                        <button type="submit">Change</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" style="display:inline">
+                        <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+                        <input type="hidden" name="update_password" value="1">
+                        <input type="hidden" name="id" value="<?php echo $u['id']; ?>">
+                        <input type="password" name="password_new" placeholder="New password">
+                        <button type="submit">Set</button>
+                    </form>
+                </td>
+                <td>
+                    <?php if($u['id'] != current_user()['id']): ?>
+                        <a href="<?php echo BASE_PATH; ?>users?delete=<?php echo $u['id']; ?>" onclick="return confirm('delete?')">Delete</a>
+                    <?php else: ?>-
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</section>
+
+
+
+
 <?php include 'footer.php'; ?>

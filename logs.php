@@ -6,10 +6,28 @@ $logs = $db->query('SELECT * FROM logs ORDER BY created_at DESC')->fetchAll(PDO:
 include 'header.php';
 include 'dashboard_nav.php';
 ?>
-<h2>Logs</h2>
-<ul>
-<?php foreach($logs as $l): ?>
-    <li><?php echo $l['created_at']; ?> - <?php echo htmlspecialchars($l['message']); ?></li>
-<?php endforeach; ?>
-</ul>
+
+
+
+
+
+
+
+
+<section class="logs-page">
+    <div class="content">
+        <h2>Logs</h2>
+        <ul>
+        <?php foreach($logs as $l): ?>
+            <li><?php echo $l['created_at']; ?> - <?php echo htmlspecialchars($l['message']); ?></li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+</section>
+
+
+
+
+
+
 <?php include 'footer.php'; ?>

@@ -4,11 +4,9 @@ require_once 'config.php';
 $db = new PDO("mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";charset=utf8mb4", DB_USER, DB_PASS);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Ensure database structure is present
 initialize_db($db);
 $db->exec("USE `" . DB_NAME . "`");
 
-// Prevent repeated setup when users already exist
 if (users_exist($db)) {
     echo "Setup has already been completed.";
     exit;

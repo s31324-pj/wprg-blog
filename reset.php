@@ -37,18 +37,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 include 'header.php';
 ?>
-<h2>Reset Password</h2>
-<?php if(isset($success)): ?>
-<p>Password updated. You may <a href="<?php echo BASE_PATH; ?>login">log in</a>.</p>
-<?php elseif(isset($invalid) && $invalid): ?>
-<p>Invalid or expired token.</p>
-<?php else: ?>
-<?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-    <input type="password" name="password" placeholder="New password" required>
-    <button type="submit">Reset Password</button>
-</form>
-<?php endif; ?>
+
+
+<section class="reset-page">
+    <div class="content">
+        <h2>Reset Password</h2>
+        <?php if(isset($success)): ?>
+        <p>Password updated. You may <a href="<?php echo BASE_PATH; ?>login">log in</a>.</p>
+        <?php elseif(isset($invalid) && $invalid): ?>
+        <p>Invalid or expired token.</p>
+        <?php else: ?>
+        <?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+            <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
+            <input type="password" name="password" placeholder="New password" required>
+            <button type="submit">Reset Password</button>
+        </form>
+        <?php endif; ?>
+    </div>
+</section>
+
+
+
 <?php include 'footer.php'; ?>

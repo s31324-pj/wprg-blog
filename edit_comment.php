@@ -21,9 +21,22 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 include 'header.php';
 include 'dashboard_nav.php';
 ?>
-<h2>Edit Comment</h2>
-<form method="post">
-    <textarea name="content" required><?php echo htmlspecialchars($comment['content']); ?></textarea><br>
-    <button type="submit">Save</button>
-</form>
+
+
+
+
+<section class="ecomment-page">
+    <div class="content">
+        <h2>Edit Comment</h2>
+        <form method="post">
+            <textarea name="content" required><?php echo htmlspecialchars($comment['content']); ?></textarea>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</section>
+
+
+
+
+
 <?php include 'footer.php'; ?>

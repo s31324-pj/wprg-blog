@@ -13,24 +13,36 @@ $total = $db->query('SELECT COUNT(*) FROM posts')->fetchColumn();
 $pages = ceil($total/$perPage);
 include 'header.php';
 ?>
-<h2>Posts</h2>
-<?php $lastDate=null; foreach($posts as $post): ?>
-<?php $d = date('Y-m-d', strtotime($post['created_at'])); if($d!==$lastDate){ echo '<h3>'.htmlspecialchars($d).'</h3>'; $lastDate=$d; } ?>
-<div class="post">
-    <h3><a href="<?php echo BASE_PATH; ?>post/<?php echo htmlspecialchars($post['slug']); ?>"><?php echo htmlspecialchars($post['title']); ?></a></h3>
-<small><?php echo $post['created_at']; ?> by <?php echo htmlspecialchars($post['username']); ?></small>
-    <p>
-        <?php if(!empty($post['excerpt'])){
-            echo nl2br(htmlspecialchars($post['excerpt']));
-        }else{
-            echo nl2br(snippet_text($post['content']));
-        } ?>
-    </p>
-    <img src="<?php echo BASE_PATH . ($post['image_path'] ?: 'content/default-featured-image.webp'); ?>" style="max-width:200px">
-</div>
-<?php endforeach; ?>
-<p>
-<?php if($page>1): ?><a href="<?php echo BASE_PATH; ?>?page=<?php echo $page-1; ?>">Previous</a><?php endif; ?>
-<?php if($page<$pages): ?> <a href="<?php echo BASE_PATH; ?>?page=<?php echo $page+1; ?>">Next</a><?php endif; ?>
-</p>
+
+
+<section class="home-page">
+    <div class="content">
+        <div id="post-grid">
+            <?php $lastDate=null; foreach($posts as $post): ?>
+           <a href="<?php echo BASE_PATH; ?>post/<?php echo htmlspecialchars($post['slug']); ?>" class="post-tile">
+                <img src="<?php echo BASE_PATH . ($post['image_path'] ?: 'content/default-featured-image.webp'); ?>">
+                <h3><?php echo htmlspecialchars($post['title']); ?></h3>
+                <p>
+                    <?php if(!empty($post['excerpt'])){
+                        echo nl2br(htmlspecialchars($post['excerpt']));
+                    }else{
+                        echo nl2br(snippet_text($post['content']));
+                    } ?>
+                </p>
+                <small class="post-info"><?php echo $post['created_at']; ?> by <?php echo htmlspecialchars($post['username']); ?></small>
+                
+            </a>
+            <?php endforeach; ?>
+            
+        </div>
+        <p>
+            <?php if($page>1): ?><a href="<?php echo BASE_PATH; ?>?page=<?php echo $page-1; ?>">Previous</a><?php endif; ?>
+            <?php if($page<$pages): ?> <a href="<?php echo BASE_PATH; ?>?page=<?php echo $page+1; ?>">Next</a><?php endif; ?>
+        </p>
+    </div>
+</section>
+
+
+
+
 <?php include 'footer.php'; ?>

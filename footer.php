@@ -1,6 +1,8 @@
 </main>
 <footer>
-    <p>&copy; 2024 Simple Blog</p>
+    <div class="content">
+        <p>s31324 Patryk Latkowski 2024 &copy; Simple Blog</p>
+    </div>
 </footer>
 </body>
 </html>

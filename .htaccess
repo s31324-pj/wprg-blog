@@ -1,0 +1,30 @@
+# Disable MultiViews to prevent content negotiation
+Options -MultiViews
+
+# Enable URL rewriting
+RewriteEngine On
+RewriteBase /wprg/projekt-wprg/
+
+# 1) Redirect direct requests to *.php to extensionless URLs
+RewriteCond %{THE_REQUEST} \s/[^?]*\.php [NC]
+RewriteRule ^(.+)\.php$ $1 [R=301,L]
+
+# 2) Remove “index” or “index.php” from any URL
+RewriteCond %{THE_REQUEST} \s/([^?]*/)?index(?:\.php)? [NC]
+RewriteRule ^((?:.+/)?)(?:index(?:\.php)?)/?$ $1 [R=301,L]
+
+# 3) Serve index.php for the directory root
+RewriteRule ^$ index.php [L]
+
+# 4) Pretty URLs for posts: /post/slug → post.php?slug=slug
+RewriteRule ^post/([^/]+)/?$ post.php?slug=$1 [L,QSA]
+
+# 5) If no file but a .php exists, serve that
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L,QSA]
+
+# 6) If no file but a dir/index.php exists, serve that
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}/index.php -f
+RewriteRule ^(.+)$ $1/index.php [L,QSA]

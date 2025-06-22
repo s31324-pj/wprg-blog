@@ -1,0 +1,6 @@
+blog.db
+uploads/
+
+# ignore placeholder images
+content/default-pfp.webp
+content/default-featured-image.webp

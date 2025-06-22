@@ -57,10 +57,18 @@ include 'header.php';
         <small><?php echo $post['created_at']; ?> by <?php echo htmlspecialchars($post['username']); ?></small>
         <img src="<?php echo BASE_PATH . ($post['image_path'] ?: 'content/default-featured-image.webp'); ?>">
         <div class="post-content"><?php echo sanitize_html($post['content']); ?></div>
-        <p class="post-pagination">
-            <?php if($prev): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $prev; ?>">Previous post</a><?php endif; ?>
-            <?php if($next): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $next; ?>">Next post</a><?php endif; ?>
-        </p>
+        <div class="post-pagination pagination">
+            <?php if($prev): ?>
+                <a href="<?php echo BASE_PATH; ?>post/<?php echo $prev; ?>">Previous post</a>
+            <?php else: ?>
+                <div></div>
+            <?php endif; ?>
+            <?php if($next): ?>
+                <a href="<?php echo BASE_PATH; ?>post/<?php echo $next; ?>">Next post</a>
+            <?php else: ?>
+                <div></div>
+            <?php endif; ?>
+        </div>
     </div>
 </article>
 
@@ -81,7 +89,7 @@ include 'header.php';
             </div>
         </div>
         <?php endforeach; ?>
-        <p calss="comment-pagination">
+        <div class="comment-pagination pagination">
             <?php if($page>1): ?>
                 <a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page-1; ?>">Previous comments</a>
             <?php else: ?>
@@ -92,10 +100,11 @@ include 'header.php';
             <?php else: ?>
                 <div></div> 
             <?php endif; ?>
-        </p>
+            </div>
         <form method="post">
             <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-            <textarea name="content" required></textarea><br>
+            <label for="content"><h3>Add a comment</h3></label>
+            <textarea name="content" required></textarea>
             <button type="submit">Add comment</button>
         </form>
     </div>

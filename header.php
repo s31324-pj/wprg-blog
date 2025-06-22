@@ -3,6 +3,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
     <title>Simple Blog</title>
     <link rel="stylesheet" href="<?php echo BASE_PATH; ?>css/style.css">
     <script src="https://cdn.tiny.cloud/1/qzjeqaego350wuyybmdnnoxp884v9vl3bihl8ptayx8sn2t9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

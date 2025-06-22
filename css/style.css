@@ -514,7 +514,16 @@ header nav #logout-link {
     gap: 32px;
 }
 
+.api-page form {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
 
+.api-page pre {
+    margin: -15px 0 10px 0;
+    font-size: 16px;
+}
 
 
 

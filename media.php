@@ -74,37 +74,66 @@ if(!$popup){
     echo '</head><body><main>';
 }
 ?>
-<h2>Media Library</h2>
-<?php if(isset($upload_error)) echo '<p style="color:red">'.htmlspecialchars($upload_error).'</p>'; ?>
-<form method="post" enctype="multipart/form-data">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <input type="file" name="file" required>
-    <button type="submit">Upload</button>
-</form>
-<div class="media-grid">
-<?php foreach($files as $f): ?>
-    <div class="media-item">
-        <img src="<?php echo BASE_PATH . $f; ?>" style="max-width:100px;cursor:pointer" onclick="select('<?php echo addslashes($f); ?>')">
-        <div><?php echo htmlspecialchars(basename($f)); ?></div>
-    </div>
-<?php endforeach; ?>
-</div>
-<?php if($total > $page*$perPage): ?>
-    <a href="?<?php echo http_build_query(['page'=>$page+1,'field'=>$field,'profile'=>$profile?1:null,'popup'=>$popup?1:null]); ?>">Load more</a>
-<?php endif; ?>
-<script>
-function select(path){
-    if(window.opener && '<?php echo $field; ?>'){
-        var inp = window.opener.document.getElementById('<?php echo $field; ?>');
-        if(inp){
-            inp.value = path;
-            var ev = new Event('change');
-            inp.dispatchEvent(ev);
+
+
+
+
+
+
+
+
+
+<?php if(!$popup){
+    echo '<section class="media-page">';
+} else {
+    echo '<section class="media-page popup">';
+} ?>
+
+    <div class="content">
+        <div class="first-div">
+            <h2>Media Library</h2>
+            <?php if(isset($upload_error)) echo '<p style="color:red">'.htmlspecialchars($upload_error).'</p>'; ?>
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+                <input type="file" name="file" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+        <div class="media-grid">
+            <?php foreach($files as $f): ?>
+            <div class="media-item">
+                <img src="<?php echo BASE_PATH . $f; ?>" onclick="select('<?php echo addslashes($f); ?>')">
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <?php if($total > $page*$perPage): ?>
+            <a href="?<?php echo http_build_query(['page'=>$page+1,'field'=>$field,'profile'=>$profile?1:null,'popup'=>$popup?1:null]); ?>">Load more</a>
+        <?php endif; ?>
+        <script>
+        function select(path){
+            if(window.opener && '<?php echo $field; ?>'){
+                var inp = window.opener.document.getElementById('<?php echo $field; ?>');
+                if(inp){
+                    inp.value = path;
+                    var ev = new Event('change');
+                    inp.dispatchEvent(ev);
+                }
+                window.close();
+            }
         }
-        window.close();
-    }
-}
-</script>
+        </script>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
 <?php if(!$popup){
     include 'footer.php';
 } else {

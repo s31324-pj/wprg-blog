@@ -28,7 +28,7 @@ h2 {
 
 .content {
     max-width: 1200px;
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
 }
@@ -459,6 +459,67 @@ header nav #logout-link {
     font-size: 0.9em;
 }
 
+/*    Dashboard - Media   */
+.media-page .content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.media-page .content form {
+    display: flex;
+    gap: 20px;
+}
+
+.media-page .content form input[type="file"] {
+    flex-grow: 1;    
+}
+
+.media-page .content form button {
+    max-width: 200px;
+    grid-column: span 1;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1em;
+}
+.media-item {
+    text-align: center;
+}
+.media-item img{
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.media-page.popup  {
+    margin: 0;
+    padding: 20px;
+}
+
+@media (max-width: 1200px) {
+    .media-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/*   Dashboard - API   */
+.api-page .content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+
+
+
+
+
+
 
 
 
@@ -485,14 +546,7 @@ footer .content {
 
 
 
-.media-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-}
-.media-item {
-    text-align: center;
-}
+
 
 
 

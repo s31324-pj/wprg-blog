@@ -49,7 +49,7 @@ include 'dashboard_nav.php';
             <textarea name="excerpt" placeholder="Excerpt (optional)"></textarea>
             <input type="hidden" name="image_path" id="image-path">
             <button type="button" onclick="window.open('media.php?popup=1&field=image-path', 'media', 'width=800,height=600');">Choose featured image</button>
-            <img id="image-path-preview" style="max-width:100px" src="<?php echo BASE_PATH; ?>content/default-featured-image.webp">
+            <img id="image-path-preview" src="<?php echo BASE_PATH; ?>content/default-featured-image.webp">
             <button type="submit">Add Post</button>
         </form>
         <script>
@@ -63,6 +63,9 @@ include 'dashboard_nav.php';
                 if(prev){ prev.src = inp.value ? '<?php echo BASE_PATH; ?>' + inp.value : ''; }
             }
             document.getElementById('image-path').addEventListener('change', function(){ updatePreview('image-path'); });
+            if ('' == document.getElementById('image-path').value) {
+                document.getElementById('image-path').value = 'content/default-featured-image.webp';
+            }
             updatePreview('image-path');
         </script>
         

@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+require_once 'auth.php';
 $db = get_db();
 $slug = $_GET['slug'] ?? '';
 $post = $db->prepare('SELECT p.*, u.username FROM posts p LEFT JOIN users u ON p.user_id = u.id WHERE p.slug=?');
@@ -20,7 +21,7 @@ $next = $next->fetchColumn();
 $page = max(1, (int)($_GET['page'] ?? 1));
 $perPage = 10;
 $offset = ($page-1)*$perPage;
-$comments = $db->prepare('SELECT c.*, u.username FROM comments c LEFT JOIN users u ON c.user_id = u.id WHERE post_id=:post_id ORDER BY created_at LIMIT :lim OFFSET :off');
+$comments = $db->prepare('SELECT c.*, u.username AS user_username, u.profile_picture FROM comments c LEFT JOIN users u ON c.user_id = u.id WHERE c.post_id=:post_id ORDER BY c.created_at LIMIT :lim OFFSET :off');
 $comments->bindValue(':post_id', $id, PDO::PARAM_INT);
 $comments->bindValue(':lim', $perPage, PDO::PARAM_INT);
 $comments->bindValue(':off', $offset, PDO::PARAM_INT);
@@ -34,7 +35,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     if(!verify_csrf_token($_POST['csrf_token'] ?? '')){
         die('Invalid CSRF token');
     }
-    $author = current_user()['username'] ?? 'Gość';
+    $author = current_user()['username'] ?? 'Guest';
     $user_id = current_user()['id'] ?? null;
     $stmt = $db->prepare('INSERT INTO comments (post_id,user_id,author,content) VALUES (?,?,?,?)');
     $stmt->execute([$id,$user_id,$author,$_POST['content']]);
@@ -68,11 +69,16 @@ include 'header.php';
         <h3>Comments</h3>
         <?php foreach($comments as $c): ?>
         <div class="comment">
-            <strong><?php echo htmlspecialchars($c['author']); ?></strong> (<?php echo $c['created_at']; ?>)
-            <?php if(isset($_SESSION['user']) && $_SESSION['user']['role']==='admin'): ?>
-                <a href="<?php echo BASE_PATH; ?>delete_comment.php?id=<?php echo $c['id']; ?>" onclick="return confirm('delete?')">Delete</a>
-            <?php endif; ?>
-            <p><?php echo nl2br(htmlspecialchars($c['content'])); ?></p>
+            <img src="<?php echo BASE_PATH . (!empty($c['profile_picture']) ? $c['profile_picture'] : 'content/default-pfp.webp'); ?>" class="avatar" alt="Profile">
+            <div class="comment-text">
+                <div class="comment-info">
+                    <strong><?php echo htmlspecialchars($c['author']); ?></strong> (<?php echo $c['created_at']; ?>)
+                    <?php if(isset($_SESSION['user']) && $_SESSION['user']['role']==='admin'): ?>
+                        <a href="<?php echo BASE_PATH; ?>delete_comment.php?id=<?php echo $c['id']; ?>" onclick="return confirm('delete?')" class="delete-comment">Delete</a>
+                    <?php endif; ?>
+                </div>
+                <p><?php echo nl2br(htmlspecialchars($c['content'])); ?></p>
+            </div>
         </div>
         <?php endforeach; ?>
         <p>

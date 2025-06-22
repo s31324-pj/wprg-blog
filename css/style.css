@@ -217,7 +217,7 @@ header nav #logout-link {
     flex-direction: column;
 }
 
-.post-page .content img{
+.post-page:not(.comments) .content img{
     width: 100%;
     max-height: 280px;
     border-radius: 10px;
@@ -237,6 +237,20 @@ header nav #logout-link {
 .post-page .post-pagination {
     margin-top: 10px;
     color: #818181;
+}
+
+.post-page.comments .content {
+    gap: 20px;
+}
+
+.post-page.comments .content .comment {
+    display: flex;
+    gap: 10px;
+}
+
+.post-page.comments .content .comment .delete-comment {
+    margin-left: 10px;
+    color: rgb(196, 40, 40)
 }
 
 
@@ -263,22 +277,6 @@ footer .content {
 
 
 
-
-
-.comment {
-    margin-left: 1em;
-}
-
-form {
-    margin: 1em 0;
-}
-
-.dashboard-nav {
-    margin: 1em 0;
-}
-.dashboard-nav a {
-    margin-right: 1em;
-}
 
 
 .media-grid {

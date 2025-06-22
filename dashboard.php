@@ -34,30 +34,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'header.php';
 include 'dashboard_nav.php';
 ?>
-<h2>Dashboard</h2>
-<p>
-    <img src="<?php echo BASE_PATH . (!empty($user['profile_picture']) ? $user['profile_picture'] : 'content/default-pfp.webp'); ?>" class="avatar" alt="Profile">
-    Welcome, <?php echo htmlspecialchars($user['username']); ?>!
-</p>
 
-<h3>Change Password</h3>
-<?php if(isset($message)) echo '<p>'.htmlspecialchars($message).'</p>'; ?>
-<?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <label>New password <input type="password" name="new_password"></label><br>
-    <input type="hidden" name="profile_picture_path" id="pfp-path" value="<?php echo htmlspecialchars($user['profile_picture'] ?? ''); ?>">
-    <button type="button" onclick="window.open('media.php?popup=1&field=pfp-path&profile=1', 'media', 'width=800,height=600');">Select picture</button>
-    <img id="pfp-path-preview" style="max-width:100px"><br>
-    <button type="submit">Update</button>
-</form>
-<script>
-    function updatePreview(id){
-        var inp = document.getElementById(id);
-        var prev = document.getElementById(id+'-preview');
-        if(prev){ prev.src = inp.value ? '<?php echo BASE_PATH; ?>' + inp.value : ''; }
-    }
-    document.getElementById('pfp-path').addEventListener('change', function(){ updatePreview('pfp-path'); });
-    updatePreview('pfp-path');
-</script>
+
+
+
+<section class="dashboard-page">
+    <div class="content">
+        <h2>Dashboard</h2>
+        <p>
+            <img src="<?php echo BASE_PATH . (!empty($user['profile_picture']) ? $user['profile_picture'] : 'content/default-pfp.webp'); ?>" class="avatar" alt="Profile">
+            Welcome, <?php echo htmlspecialchars($user['username']); ?>!
+        </p>
+
+        <div class="update-profile">
+            <h3>Change Password</h3>
+            <?php if(isset($message)) echo '<p>'.htmlspecialchars($message).'</p>'; ?>
+            <?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
+            <form method="post">
+                <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+                <div class="form-group">
+                    <label for="new_password">New password</label>
+                    <input type="password" name="new_password" id="new_password">
+                </div>
+                <div class="form-group">
+                    <label for ="pfp-path">Profile picture</label>
+                    <input type="hidden" name="profile_picture_path" id="pfp-path" value="<?php echo htmlspecialchars($user['profile_picture'] ?? ''); ?>">
+                    <button type="button" onclick="window.open('media.php?popup=1&field=pfp-path&profile=1', 'media', 'width=800,height=600');">Select picture</button>
+                    <img id="pfp-path-preview" style="max-width:100px">
+                </div>
+                
+                
+                <button type="submit">Update</button>
+            </form>
+            <script>
+                function updatePreview(id){
+                    var inp = document.getElementById(id);
+                    var prev = document.getElementById(id+'-preview');
+                    if(prev){ prev.src = inp.value ? '<?php echo BASE_PATH; ?>' + inp.value : ''; }
+                }
+                document.getElementById('pfp-path').addEventListener('change', function(){ updatePreview('pfp-path'); });
+                updatePreview('pfp-path');
+            </script>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
 <?php include 'footer.php'; ?>

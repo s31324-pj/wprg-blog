@@ -8,7 +8,7 @@
         <nav class="dashboard-nav">
         <?php if($user['role'] === 'author' || $user['role'] === 'admin'): ?>
                 <a href="<?php echo BASE_PATH; ?>admin">Manage Posts</a>
-                <a href="<?php echo BASE_PATH; ?>media" target="_blank">Media Library</a>
+                <a href="<?php echo BASE_PATH; ?>media">Media Library</a>
                 <a href="<?php echo BASE_PATH; ?>api_key">API Key</a>
             <?php endif; ?>
             <?php if($user['role'] === 'admin'): ?>

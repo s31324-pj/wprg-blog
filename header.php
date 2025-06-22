@@ -17,7 +17,7 @@
             <?php if(isset($_SESSION['user'])): ?>
                 <a href="<?php echo BASE_PATH; ?>dashboard" class="user-info">
                     <img src="<?php echo BASE_PATH . (!empty($_SESSION['user']['profile_picture']) ? $_SESSION['user']['profile_picture'] : 'content/default-pfp.webp'); ?>" alt="Profile" class="avatar">
-                    <div id="header-greeting"><span id="header-hello">Hello,</span><span id="header-username"><?php echo htmlspecialchars($_SESSION['user']['username']); ?>!</span></div>
+                    <div id="header-greeting"><span class="header-hello">Hello,</span><span id="header-username"><?php echo htmlspecialchars($_SESSION['user']['username']); ?></span></div>
                 </a>
             <?php else: ?>
                 <a href="<?php echo BASE_PATH; ?>login" class="login-link">Login</a>

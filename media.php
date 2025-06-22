@@ -66,6 +66,7 @@ $files = array_slice(array_keys($files), ($page-1)*$perPage, $perPage);
 
 if(!$popup){
     include 'header.php';
+    include 'dashboard_nav.php';
 } else {
     if (session_status() === PHP_SESSION_NONE) session_start();
     echo '<!DOCTYPE html><html lang="pl"><head><meta charset="UTF-8">';

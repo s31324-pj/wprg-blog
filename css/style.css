@@ -16,12 +16,19 @@ p, h1, h2, h3, h4, h5, h6 {
     line-height: 1.4;
 }
 
+ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 17px;
+}
+
 h2 {
     font-size: 2em;
 }
 
 .content {
     max-width: 1200px;
+    width: 1200px;
     margin: 0 auto;
     display: flex;
 }
@@ -112,7 +119,7 @@ form textarea {
     grid-column: span 2;
 }
 
-form button[type="submit"] {
+form button, .edit-button {
     background: #5a5a5a;
     color: #fff;
     padding: 10px 20px;
@@ -120,10 +127,12 @@ form button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     grid-column: span 2;
+    font-size: inherit;
 }
 
-form button[type="submit"]:hover {
+form button[type="submit"]:hover, .edit-button:hover {
     background: #4a4a4a;
+    font-size: inherit;
 }
 
 .pagination {
@@ -133,6 +142,25 @@ form button[type="submit"]:hover {
     gap: 10px;
     margin-top: 20px;
 }
+
+.delete-button {
+    background-color: rgb(196, 40, 40);
+}
+
+.delete-button:hover {
+    background-color: rgb(255, 131, 131) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -175,7 +203,7 @@ header .user-info #header-greeting {
     flex-direction: column;
 }
 
-header .user-info #header-greeting #header-hello{
+header .user-info #header-greeting .header-hello {
     font-size: 0.9em;
     opacity: 0.8;
 }
@@ -195,11 +223,19 @@ header nav #logout-link {
     margin: 0;
 }
 
+.dnav-section .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 .dnav-section nav {
     display: flex;
     flex-direction: row;
     gap: 20px;
-    font-size: 0.9em
+    font-size: 0.9em;
 }
 
 
@@ -264,7 +300,7 @@ header nav #logout-link {
     width: 100%;
     max-height: 280px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin: 10px 0;
     object-fit: cover;
     object-position: center;
 }
@@ -291,6 +327,11 @@ header nav #logout-link {
 }
 .post-page.comments .content .comment .delete-comment:hover {
     color: rgb(255, 131, 131);
+}
+
+.post-page:not(.comments) .content > small:first-of-type {
+    margin-top: -20px;
+    color: #818181;
 }
 
 /*   Login / Forgot / Register   */
@@ -341,6 +382,86 @@ header nav #logout-link {
 .login-page .login-links #forgot:hover {
     color: hsl(227, 100%, 82%);
 }
+
+/*   Dashboard   */
+
+.dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.dashboard-page .content {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.dashboard-page .content .update-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dashboard-page .content .update-profile form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    gap: 20px
+}
+
+.dashboard-page .content .update-profile form button[type="button"], .edit-button {
+    background: rgb(168, 168, 168);
+}
+
+.dashboard-page .content .update-profile form button[type="button"]:hover, .edit-button:hover {
+    background: rgb(143, 143, 143);
+}
+
+.dashboard-page .content .update-profile form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+}
+
+/*   Dashboard - Posts   */
+.dashboard-page.heading h2{
+    margin-bottom: -10px;
+}
+
+.dashboard-page.post-editor form > * {
+    grid-column: span 2;
+}
+
+.dashboard-page.post-editor form img {
+    aspect-ratio: 4/3;
+    width: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.dashboard-page.posts ul {
+    list-style-type: circle;
+}   
+
+.dashboard-page.posts .content li {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    
+}
+
+.dashboard-page.posts .content li button, .dashboard-page.posts .content li .edit-button {
+    padding: 5px 10px;
+    font-size: 0.9em;
+}
+
+
+
+
 
 
 

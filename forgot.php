@@ -27,15 +27,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 include 'header.php';
 ?>
-<h2>Forgot Password</h2>
-<?php if(isset($sent)): ?>
-<p>If that email exists in our system, a reset link has been sent.</p>
-<?php elseif(isset($error)): ?>
-<p style="color:red"><?php echo htmlspecialchars($error); ?></p>
-<?php endif; ?>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <input type="email" name="email" placeholder="Your email" required>
-    <button type="submit">Send Reset Link</button>
-</form>
+
+
+
+
+
+
+
+
+
+<section class="login-page">
+    <div class="content">
+        <h2>Reset password</h2>
+        <?php if(isset($sent)): ?>
+        <p>If that email exists in our system, a reset link has been sent.</p>
+        <?php elseif(isset($error)): ?>
+        <p style="color:red"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="Your email" required>
+            <button type="submit">Send Reset Link</button>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php include 'footer.php'; ?>
+
+
+
+

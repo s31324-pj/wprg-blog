@@ -81,9 +81,17 @@ include 'header.php';
             </div>
         </div>
         <?php endforeach; ?>
-        <p>
-            <?php if($page>1): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page-1; ?>">Previous comments</a><?php endif; ?>
-            <?php if($page<$commentPages): ?> <a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page+1; ?>">Next comments</a><?php endif; ?>
+        <p calss="comment-pagination">
+            <?php if($page>1): ?>
+                <a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page-1; ?>">Previous comments</a>
+            <?php else: ?>
+                <div></div> 
+            <?php endif; ?>
+            <?php if($page<$commentPages): ?>
+                <a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page+1; ?>">Next comments</a>
+            <?php else: ?>
+                <div></div> 
+            <?php endif; ?>
         </p>
         <form method="post">
             <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">

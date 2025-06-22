@@ -23,14 +23,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 include 'header.php';
 ?>
-<h2>Login</h2>
-<?php if(isset($error)) echo '<p style="color:red">'.$error.'</p>'; ?>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit">Login</button>
-</form>
-<p><a href="<?php echo BASE_PATH; ?>forgot">Forgot password?</a></p>
+
+
+
+
+<section class="login-page">
+    <div class="content">
+        <h2>Login</h2>
+        <?php if(isset($error)) echo '<p style="color:red">'.$error.'</p>'; ?>
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Username" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="login-links">
+            <a href="<?php echo BASE_PATH; ?>forgot" id="forgot">Forgot password?</a>
+            <a href="<?php echo BASE_PATH; ?>register" id="register">Don't have an account?</a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
 <?php include 'footer.php'; ?>
 

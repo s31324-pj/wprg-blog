@@ -24,14 +24,40 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 }
 include 'header.php';
 ?>
-<h2>Register</h2>
-<?php if(isset($error)) echo '<p style="color:red">'.$error.'</p>'; ?>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <input type="text" name="username" required>
-    <input type="email" name="email" required>
-    <input type="password" name="password" required>
-    <button type="submit">Register</button>
-</form>
+
+
+
+
+
+
+
+
+
+
+<section class="login-page">
+    <div class="content">
+        <h2>Register</h2>
+        <?php if(isset($error)) echo '<p style="color:red">'.$error.'</p>'; ?>
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+            <label for="username">Username</label>
+            <input type="text" name="username" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
 <?php include 'footer.php'; ?>
 

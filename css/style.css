@@ -141,7 +141,7 @@ form button[type="submit"]:hover {
 header {
     background:#5a5a5a;
     color:#fff;
-    padding: 20px 20px;
+    padding: 10px 20px;
 }
 
 header .content {
@@ -156,6 +156,7 @@ header nav {
     gap: 30px;
     justify-content: center;
     align-items: center;
+    min-height: 40px;
 }
 
 header a {
@@ -182,6 +183,26 @@ header .user-info #header-greeting #header-hello{
 header nav #logout-link {
     opacity: 0.7;
 }
+
+
+/*   DASHBOARD NAVIGATION   */
+.dnav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 15px;
+    background: #e0e0e0;
+    margin: 0;
+}
+
+.dnav-section nav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 0.9em
+}
+
+
 
 
 
@@ -320,7 +341,6 @@ header nav #logout-link {
 .login-page .login-links #forgot:hover {
     color: hsl(227, 100%, 82%);
 }
-
 
 
 

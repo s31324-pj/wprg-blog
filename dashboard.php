@@ -32,13 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 include 'header.php';
+include 'dashboard_nav.php';
 ?>
 <h2>Dashboard</h2>
 <p>
     <img src="<?php echo BASE_PATH . (!empty($user['profile_picture']) ? $user['profile_picture'] : 'content/default-pfp.webp'); ?>" class="avatar" alt="Profile">
     Welcome, <?php echo htmlspecialchars($user['username']); ?>!
 </p>
-<?php include 'dashboard_nav.php'; ?>
+
 <h3>Change Password</h3>
 <?php if(isset($message)) echo '<p>'.htmlspecialchars($message).'</p>'; ?>
 <?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>

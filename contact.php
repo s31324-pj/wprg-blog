@@ -21,14 +21,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 include 'header.php';
 ?>
-<h2>Contact</h2>
-<?php if(isset($success)) echo '<p>Message sent.</p>'; ?>
-<?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <input type="email" name="email" placeholder="Your email" required><br>
-    <input type="text" name="subject" placeholder="Subject" required><br>
-    <textarea name="message" required></textarea><br>
-    <button type="submit">Send</button>
-</form>
+
+
+<section class="contact-page">
+    <div class="content">
+        <h2>Contact</h2>
+        <?php if(isset($success)) echo '<p>Message sent.</p>'; ?>
+        <?php if(isset($error)) echo '<p style="color:red">'.htmlspecialchars($error).'</p>'; ?>
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+            <div class="form-segment">
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Your email" required>
+            </div>
+            <div class="form-segment">
+                <label for="subject">Subject:</label>
+                <input type="text" name="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-segment">
+                <label for="message">Message:</label>
+                <textarea name="message" placeholder="Type your message here..." required></textarea>
+            </div>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</section>
+
+
 <?php include 'footer.php'; ?>

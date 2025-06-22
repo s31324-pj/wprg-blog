@@ -3,6 +3,7 @@
 * {
     box-sizing: border-box;
     text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 a {
@@ -73,9 +74,50 @@ section {
   margin-bottom: 7px;
 }
 
-
 .post-tile .post-info {
     margin-top: auto
+}
+
+form  {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+form .form-segment {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+form .form-segment:nth-of-type(3) {
+    grid-column: span 2;
+} 
+
+form input, form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+form textarea {
+    resize: vertical;
+    height: 200px;
+    font-family: inherit;
+}
+
+form button[type="submit"] {
+    background: #5a5a5a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    grid-column: span 2;
+}
+
+form button[type="submit"]:hover {
+    background: #4a4a4a;
 }
 
 
@@ -130,16 +172,34 @@ header nav #logout-link {
 
 
 /*   Content of pages   */
+
 /*   Home   */
 .home-page .content {
     display: flex;
     flex-direction: column;
 }
-
 .home-page #post-grid {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap: 32px;
+}
+
+/*   Contact   */
+.contact-page .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.contact-page h2 {
+    text-align: center;
+}
+
+.contact-page form {
+    width: 100%;
+    max-width: 600px;
 }
 
 

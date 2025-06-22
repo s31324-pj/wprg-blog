@@ -45,35 +45,48 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
 include 'header.php';
 ?>
-<article>
-    <h2><?php echo htmlspecialchars($post['title']); ?></h2>
-    <small><?php echo $post['created_at']; ?> by <?php echo htmlspecialchars($post['username']); ?></small>
-    <img src="<?php echo BASE_PATH . ($post['image_path'] ?: 'content/default-featured-image.webp'); ?>" style="max-width:300px">
-    <div><?php echo sanitize_html($post['content']); ?></div>
-    <p>
-        <?php if($prev): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $prev; ?>">Previous</a><?php endif; ?>
-        <?php if($next): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $next; ?>">Next</a><?php endif; ?>
-    </p>
+
+
+
+
+
+<article class="section post-page">
+    <div class="content">
+        <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+        <small><?php echo $post['created_at']; ?> by <?php echo htmlspecialchars($post['username']); ?></small>
+        <img src="<?php echo BASE_PATH . ($post['image_path'] ?: 'content/default-featured-image.webp'); ?>">
+        <div class="post-content"><?php echo sanitize_html($post['content']); ?></div>
+        <p class="post-pagination">
+            <?php if($prev): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $prev; ?>">Previous post</a><?php endif; ?>
+            <?php if($next): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $next; ?>">Next post</a><?php endif; ?>
+        </p>
+    </div>
 </article>
-<section>
-<h3>Comments</h3>
-<?php foreach($comments as $c): ?>
-<div class="comment">
-    <strong><?php echo htmlspecialchars($c['author']); ?></strong> (<?php echo $c['created_at']; ?>)
-    <?php if(isset($_SESSION['user']) && $_SESSION['user']['role']==='admin'): ?>
-        <a href="<?php echo BASE_PATH; ?>delete_comment.php?id=<?php echo $c['id']; ?>" onclick="return confirm('delete?')">Delete</a>
-    <?php endif; ?>
-    <p><?php echo nl2br(htmlspecialchars($c['content'])); ?></p>
-</div>
-<?php endforeach; ?>
-<p>
-    <?php if($page>1): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page-1; ?>">Previous comments</a><?php endif; ?>
-    <?php if($page<$commentPages): ?> <a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page+1; ?>">Next comments</a><?php endif; ?>
-</p>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
-    <textarea name="content" required></textarea><br>
-    <button type="submit">Add comment</button>
-</form>
+
+<section class="post-page comments">
+    <div class="content">
+        <h3>Comments</h3>
+        <?php foreach($comments as $c): ?>
+        <div class="comment">
+            <strong><?php echo htmlspecialchars($c['author']); ?></strong> (<?php echo $c['created_at']; ?>)
+            <?php if(isset($_SESSION['user']) && $_SESSION['user']['role']==='admin'): ?>
+                <a href="<?php echo BASE_PATH; ?>delete_comment.php?id=<?php echo $c['id']; ?>" onclick="return confirm('delete?')">Delete</a>
+            <?php endif; ?>
+            <p><?php echo nl2br(htmlspecialchars($c['content'])); ?></p>
+        </div>
+        <?php endforeach; ?>
+        <p>
+            <?php if($page>1): ?><a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page-1; ?>">Previous comments</a><?php endif; ?>
+            <?php if($page<$commentPages): ?> <a href="<?php echo BASE_PATH; ?>post/<?php echo $slug; ?>?page=<?php echo $page+1; ?>">Next comments</a><?php endif; ?>
+        </p>
+        <form method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo csrf_token(); ?>">
+            <textarea name="content" required></textarea><br>
+            <button type="submit">Add comment</button>
+        </form>
+    </div>
 </section>
+
+
+
 <?php include 'footer.php'; ?>
